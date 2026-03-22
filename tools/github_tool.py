@@ -27,25 +27,6 @@ gitHubTool = MultiServerMCPClient(
     }
 )
 
-#@tool
-async def fetch_git_hub_tool():  
-    async with gitHubTool.session("github") as session:
-        #tools = await mcp_tools(session)  
-        tools = await gitHubTool.get_tools()      
-
-        github_tool = next(
-            (t for t in tools if t.name == "list_issues"),
-            None
-        )
-
-        if github_tool is None:
-            raise RuntimeError("GitHub tool 'list_issues' not found")
-
-        print("Tool schema:", github_tool.args)
-
-        return github_tool
-
-
 @tool
 async def fetch_issue(repo_name: str) -> str: 
     """Fetch a GitHub issues (title + description).
